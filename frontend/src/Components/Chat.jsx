@@ -20,12 +20,25 @@ function Chat({socket, username, room}) {
         }
     }
 
+    // useEffect(() => {
+    //     socket.on("receive-message", (data) => {
+    //         console.log("Message received:", data);
+    //         setMessageList((list) => [...list, data])
+    //     })
+    // }, [socket])
+
     useEffect(() => {
-        socket.on("receive-message", (data) => {
+        const receiveMessageHandler = (data) => {
             console.log("Message received:", data);
-            setMessageList((list) => [...list, data])
-        })
-    }, [socket])
+            setMessageList((list) => [...list, data]);
+        };
+
+        socket.on("receive-message", receiveMessageHandler);
+
+        return () => {
+            socket.off("receive-message", receiveMessageHandler);
+        };
+    }, [socket]);
 
   return (
     <div className='flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 p-10'>
