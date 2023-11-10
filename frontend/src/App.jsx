@@ -4,7 +4,6 @@ import io from 'socket.io-client'
 import Chat from './Components/Chat'
 import JoinChat from './Components/JoinChat'
 
-
 const socket = io.connect("http://localhost:3000")
 
 function App() {

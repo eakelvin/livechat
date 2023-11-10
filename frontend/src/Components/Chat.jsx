@@ -48,7 +48,9 @@ function Chat({socket, username, room}) {
       {messageList.map((content) => {
             return (
               <div className={username === content.user ? "flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end" : "flex w-full mt-2 space-x-3 max-w-xs"}>
-                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
+                  <div className='flex justify-center items-center p-2'>{content.user.charAt(0)}</div>
+                </div>
                 <div>
                   <div className={username === content.user ? "bg-gray-300 p-3 rounded-r-lg rounded-bl-lg" : "bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg"}>
                     <p className="text-sm">{content.message}</p>
@@ -71,7 +73,7 @@ function Chat({socket, username, room}) {
           onChange={(event) => {setCurrentMessage(event.target.value)}}
           onKeyPress={(event) => {event.key === "Enter" && sendMessage()}} 
           />
-        <button onClick={sendMessage}>Send</button>
+        {/* <button onClick={sendMessage}>Send</button> */}
       </div>
 
 

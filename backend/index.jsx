@@ -4,9 +4,11 @@ const http = require('http')
 const PORT = 3000
 const cors = require('cors')
 const { Server } = require('socket.io')
+const { error } = require('console')
 
 app.use(cors())
 const server = http.createServer(app)
+
 
 const io = new Server(server, {
     cors: {
@@ -20,7 +22,7 @@ io.on("connection", (socket) => {
 
     socket.on("join-room", (data) => {
         socket.join(data)
-        console.log(`User sabi the chatroom ${socket.id} pon ${data} `);
+        console.log(`A User has joined Chatroom ${socket.id} with Id ${data} `);
     })
 
     socket.on("send-message", (data) => {
@@ -34,4 +36,4 @@ io.on("connection", (socket) => {
 
 })
 
-server.listen(PORT, () => console.log(`Server make ready on port ${PORT}`))
+server.listen(PORT, () => console.log(`Server ready on port ${PORT}`))
